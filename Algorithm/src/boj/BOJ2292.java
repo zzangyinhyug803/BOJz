@@ -20,6 +20,9 @@ public class BOJ2292 {
 			}
 
 		}
+		
+		
+		
 		System.out.println(answer);
 	}
 }
