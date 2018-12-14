@@ -10,7 +10,7 @@ public class BOJ2775 {
 		int sum;
 		int[][] array = new int[15][14];
 		int[] res = new int[T];
-
+		
 		for(int i = 0; i<14; i++) {
 			array[0][i] = i+1;
 		}
