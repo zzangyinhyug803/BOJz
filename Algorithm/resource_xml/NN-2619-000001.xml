@@ -1,0 +1,187 @@
+        <?xml version="1.0" encoding="euc-kr"?>
+
+        <!DOCTYPE genome_infranet[
+            <!ELEMENT genome_infranet (public_data, data_set, first_data, second_data, etc_data)>
+                <!ELEMENT public_data (sample_info)>
+                    <!ELEMENT sample_info (tissue?, organ?, cell_line?, developmental_stage?, age?, treatments?, ngs_library?, replicates?, phenotype_data?, population_information?, etc?)>
+                            <!ATTLIST sample_info department_name CDATA #REQUIRED>
+                            <!ATTLIST sample_info project_manager CDATA #REQUIRED>					
+                            <!ATTLIST sample_info project_id CDATA #REQUIRED>
+                            <!ATTLIST sample_info project_title CDATA #REQUIRED>
+                            <!ATTLIST sample_info data_registration_id CDATA #REQUIRED>
+                            <!ATTLIST sample_info public_date CDATA #REQUIRED> 
+
+                            <!ELEMENT tissue (#PCDATA)>
+                            <!ELEMENT organ (#PCDATA)>
+                            <!ELEMENT cell_line (#PCDATA)>
+                            <!ELEMENT developmental_stage (#PCDATA)>
+                            <!ELEMENT age (#PCDATA)>
+                            <!ELEMENT treatments (#PCDATA)>
+                            <!ELEMENT ngs_library EMPTY>
+                                <!ATTLIST ngs_library strategy CDATA #IMPLIED>					
+                                <!ATTLIST ngs_library source CDATA #IMPLIED>
+                                <!ATTLIST ngs_library selection CDATA #IMPLIED>
+                            <!ELEMENT replicates EMPTY>
+                                <!ATTLIST replicates type (experimental|biological) "experimental" >
+                            
+                            <!ELEMENT phenotype_data (#PCDATA)>
+                            <!ELEMENT population_information (#PCDATA)>
+                            <!ELEMENT etc (#PCDATA)>
+                            
+                <!ELEMENT data_set (study?)>
+                    <!ELEMENT study EMPTY>
+                        <!ATTLIST study project_id CDATA #REQUIRED>
+                        <!ATTLIST study title CDATA #REQUIRED>
+                        <!ATTLIST study desc CDATA #REQUIRED>
+            
+                <!ELEMENT first_data (raw_data)>
+                    <!ATTLIST first_data sample_name CDATA #REQUIRED>
+                    <!ATTLIST first_data sample_desc CDATA #REQUIRED>
+                    <!ATTLIST first_data species_name CDATA #REQUIRED>
+                    <!ATTLIST first_data project_id CDATA #REQUIRED>
+                    <!ATTLIST first_data file_name CDATA #REQUIRED>
+                    <!ATTLIST first_data production_year CDATA #REQUIRED>
+                    
+                    <!ELEMENT raw_data (sequence_raw_data?, array_data?)>
+                        <!ELEMENT sequence_raw_data (sequencer?, adaptor_sequence?, raw_data_types?, library_information?, quality_score_version?, base_calling_program?)>
+                            <!ELEMENT sequencer EMPTY>
+                                <!ATTLIST sequencer instrument_model CDATA #IMPLIED>			
+                            <!ELEMENT adaptor_sequence EMPTY>
+                                <!ATTLIST adaptor_sequence sample_barcode_sequence CDATA #IMPLIED> 
+                            <!ELEMENT raw_data_types EMPTY>
+                                <!ATTLIST raw_data_types type (wgs|exome|rna_seq|chip_seq|medip_seq|etc) "wgs">
+                            <!ELEMENT library_information EMPTY>
+                                <!ATTLIST library_information numbers_of_library CDATA #IMPLIED>
+                                <!ATTLIST library_information read_length CDATA #IMPLIED>
+                                <!ATTLIST library_information insert_size CDATA #IMPLIED>
+                                <!ATTLIST library_information read_type (single_end|paired_end|mate_pair) "paired_end">
+                            <!ELEMENT quality_score_version (#PCDATA)>
+                            <!ELEMENT base_calling_program (#PCDATA)>
+                        <!ELEMENT array_data EMPTY>
+                            <!ATTLIST array_data type (gene_expression|snp_genotyping|dna_methylation|arrayCGH|gene_copy_number|etc) "gene_expression">
+
+
+            <!ELEMENT second_data (denobo_genome_assembly?, denovo_genome_annotation?, transcriptome_assembly?, transcriptome_quantification?, copy_number_variation?, deg?, dna_resequencing?)>
+                <!ELEMENT denobo_genome_assembly (method?, contigN50?, scaffoldN50?)>
+                    <!ATTLIST denobo_genome_assembly method CDATA #IMPLIED>
+                    <!ELEMENT contigN50 (#PCDATA)>
+                    <!ELEMENT scaffoldN50 (#PCDATA)>
+                
+                <!ELEMENT denovo_genome_annotation (method?, statistics?)>
+                    <!ATTLIST denovo_genome_annotation method CDATA #IMPLIED>
+                    <!ELEMENT statistics (#PCDATA)>
+                
+                <!ELEMENT transcriptome_assembly (reference_guided_assembly?, denovo_transcriptome_assembly?)>
+                    <!ELEMENT reference_guided_assembly EMPTY>
+                        <!ATTLIST reference_guided_assembly method CDATA #IMPLIED>
+                        <!ATTLIST reference_guided_assembly reference_genome_version CDATA #IMPLIED>
+                        <!ATTLIST reference_guided_assembly annotation_version CDATA #IMPLIED>
+                        <!ATTLIST reference_guided_assembly source CDATA #IMPLIED>
+                    <!ELEMENT denovo_transcriptome_assembly (#PCDATA)>
+                
+                <!ELEMENT transcriptome_quantification EMPTY>
+                    <!ATTLIST transcriptome_quantification method CDATA #IMPLIED>
+                    <!ATTLIST transcriptome_quantification type (rna_sequencing|miRNA_sequencing) "rna_sequencing">
+                    
+                <!ELEMENT copy_number_variation EMPTY>
+                    <!ATTLIST copy_number_variation method CDATA #IMPLIED>
+                    <!ATTLIST copy_number_variation type CDATA #IMPLIED>
+                    
+                <!ELEMENT deg (sample_pairwise_comparison?, selection_criteria?)>
+                    <!ATTLIST deg method CDATA #IMPLIED>
+                    <!ELEMENT sample_pairwise_comparison (#PCDATA)>
+                    <!ELEMENT selection_criteria (#PCDATA)>
+                
+                <!ELEMENT dna_resequencing (reference_type?, sequencing_type?, data_type?, gwas?, chip_medip_seq_assay?, dna_microarray_processed_data?)>
+                    <!ATTLIST dna_resequencing method CDATA #IMPLIED>
+                    <!ELEMENT reference_type EMPTY>
+                        <!ATTLIST reference_type genome_version CDATA #IMPLIED>
+                        <!ATTLIST reference_type annotation_version CDATA #IMPLIED>
+                        <!ATTLIST reference_type others CDATA #IMPLIED>
+
+                    <!ELEMENT sequencing_type EMPTY>
+                        <!ATTLIST sequencing_type type (wgs|wes|targeted) "wgs">
+                    <!ELEMENT data_type (#PCDATA)>
+                    <!ELEMENT gwas EMPTY>
+                        <!ATTLIST gwas method CDATA #IMPLIED>
+                    <!ELEMENT chip_medip_seq_assay EMPTY>
+                        <!ATTLIST chip_medip_seq_assay method CDATA #IMPLIED>
+                    <!ELEMENT dna_microarray_processed_data EMPTY>
+                        <!ATTLIST dna_microarray_processed_data normalization_data_selection_procedure CDATA #IMPLIED>
+            
+            <!ELEMENT etc_data (etc_info*)>	
+                <!ELEMENT etc_info EMPTY>	
+                    <!ATTLIST etc_info name CDATA #IMPLIED>
+                    <!ATTLIST etc_info desc CDATA #IMPLIED>
+                    <!ATTLIST etc_info value CDATA #IMPLIED>
+            
+        ]>
+                <genome_infranet>
+            <public_data>
+                <sample_info department_name="농림축산식품부" project_manager="천종식" project_id="914008-4" project_title="NGS를 활용한 미생물 유전체 및 전사체 분석 소프트웨어 및 시스템 개발" data_registration_id="NN-2619" public_date="2017-06-16">
+                    <tissue></tissue>
+                    <organ></organ>
+                    <cell_line></cell_line>
+                    <developmental_stage></developmental_stage>
+                    <age></age>
+                    <treatments></treatments>
+                    <ngs_library strategy="None" source="None" selection="None" />
+                    <replicates type="experimental" />
+                    <phenotype_data></phenotype_data>
+                    <population_information></population_information>
+                    <etc></etc>
+                </sample_info>
+            </public_data>
+            <data_set>
+                <study project_id="914008-4" title="RNA-sequencing of Lentinula edodes using Pacbio RS II 3" desc=""/>
+            </data_set>
+        
+        
+            <first_data sample_name="R" sample_desc="" species_name="Lentinula edodes" project_id="914008-4" file_name="L_edodes_RNA_3-6k.fq.gz" production_year="2017">
+                <raw_data>
+                    <sequence_raw_data>
+                        <sequencer instrument_model="Unspecified" />
+                        <adaptor_sequence sample_barcode_sequence="" />
+                        <raw_data_types type="RNASeq" />
+                        <library_information numbers_of_library="" read_length="" insert_size="" read_type="paired_end"/>
+                        <quality_score_version></quality_score_version>
+                        <base_calling_program></base_calling_program>
+                    </sequence_raw_data>
+                    <array_data type="gene_expression"/>
+                </raw_data>
+            </first_data>
+      
+        
+            <second_data>
+                <denobo_genome_assembly method="">
+                    <contigN50></contigN50>
+                    <scaffoldN50></scaffoldN50>
+                </denobo_genome_assembly>
+                <denovo_genome_annotation method="">
+                    <statistics></statistics>
+                </denovo_genome_annotation>
+                <transcriptome_assembly>
+                    <reference_guided_assembly method="" reference_genome_version="" annotation_version="" source=""/>
+                    <denovo_transcriptome_assembly></denovo_transcriptome_assembly>
+                </transcriptome_assembly>
+                <transcriptome_quantification method="" type="rna_sequencing"/>
+                <copy_number_variation method="" type="" />
+                <deg method="">
+                    <sample_pairwise_comparison></sample_pairwise_comparison>
+                    <selection_criteria></selection_criteria>
+                </deg>
+                <dna_resequencing method="">
+                    <reference_type genome_version="" annotation_version="" others=""/>
+                    <sequencing_type type="wgs" />
+                    <data_type></data_type>
+                    <gwas method=""/>
+                    <chip_medip_seq_assay method="" />
+                    <dna_microarray_processed_data normalization_data_selection_procedure="" />
+                </dna_resequencing>
+            </second_data>
+
+            <etc_data>
+                <etc_info name="" desc="" value="" />
+            </etc_data>	
+        </genome_infranet>
+        
